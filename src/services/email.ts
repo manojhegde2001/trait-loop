@@ -58,7 +58,7 @@ export async function sendResultEmail({ email, resultId, summary, scores }: Emai
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'TraitLoop <onboarding@resend.dev>',
+      from: 'TraitLoop <manojhegde2001@gmail.com>',
       to: email,
       subject: 'Your Big Five Personality Test Results',
       html,
