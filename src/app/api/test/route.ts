@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { calculateScores } from '@/services/scoring';
 import { sendResultEmail } from '@/services/email';
 
+export const dynamic = 'force-dynamic';
+
 const testSchema = z.object({
   answers: z.record(z.string(), z.number().min(1).max(5)),
   email: z.string().email().optional().or(z.literal('')),

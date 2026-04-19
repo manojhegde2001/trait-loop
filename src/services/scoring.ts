@@ -38,9 +38,9 @@ export function calculateScores(answers: Record<string, number>, questions: Ques
     facetCounts[f] = (facetCounts[f] || 0) + 1;
   }
 
-  const domains: any = {};
-  const summary: any = {};
-  const facets: any = {};
+  const domains: Record<Domain, number> = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+  const summary: Record<Domain, 'High' | 'Neutral' | 'Low'> = { O: 'Neutral', C: 'Neutral', E: 'Neutral', A: 'Neutral', N: 'Neutral' };
+  const facets: Record<string, number> = {};
 
   // Compute Domain averages and categories
   for (const d of ['O', 'C', 'E', 'A', 'N'] as Domain[]) {
