@@ -1,13 +1,15 @@
 import { TestFlow } from '@/features/test/TestFlow';
+import { Suspense } from 'react';
 
 export default function TestPage() {
   return (
-    <div className="py-10">
-      <div className="max-w-4xl mx-auto px-4 mb-8">
-        <h1 className="text-3xl font-black text-gray-900 tracking-tight">Personality Assessment</h1>
-        <p className="text-gray-500 font-medium">Please answer all 120 questions as honestly as possible.</p>
+    <Suspense fallback={
+      <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
+        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+        <p className="text-slate-500 font-black uppercase tracking-widest text-xs animate-pulse">Initializing Protocol...</p>
       </div>
+    }>
       <TestFlow />
-    </div>
+    </Suspense>
   );
 }

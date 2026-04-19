@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 interface EmailData {
   email: string;
@@ -8,21 +8,12 @@ interface EmailData {
 }
 
 export async function sendResultEmail({ email, resultId, summary, scores }: EmailData) {
-  // Check if SMTP is configured
-  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.warn('SMTP not configured, skipping email.');
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('RESEND_API_KEY not configured, skipping email.');
     return false;
   }
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_PORT === '465',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const resultLink = `${baseUrl}/result/${resultId}`;
@@ -66,12 +57,18 @@ export async function sendResultEmail({ email, resultId, summary, scores }: Emai
   `;
 
   try {
-    await transporter.sendMail({
-      from: `"TraitLoop" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+    const { data, error } = await resend.emails.send({
+      from: 'TraitLoop <onboarding@resend.dev>',
       to: email,
       subject: 'Your Big Five Personality Test Results',
       html,
     });
+
+    if (error) {
+      console.error('Resend API error:', error);
+      return false;
+    }
+
     return true;
   } catch (error) {
     console.error('Email sending failed:', error);

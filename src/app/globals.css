@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../node_modules/rizzui/dist";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -7,13 +9,14 @@
   --color-primary: #2563eb;
   --color-secondary: #7c3aed;
   --color-accent: #f59e0b;
-  
+
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
 }
 
+/* ─── CSS Variables ──────────────────────────────────── */
 :root {
-  --background: #ffffff;
+  --background: #f8fafc;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
@@ -23,37 +26,42 @@
   --primary-foreground: #ffffff;
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
+  --muted: #e2e8f0;
+  --muted-foreground: #475569;
+  --accent: #dbeafe;
+  --accent-foreground: #1e40af;
+  --destructive: #dc2626;
+  --destructive-foreground: #fff;
+  --border: #94a3b8;
+  --input: #94a3b8;
+  --ring: #1d4ed8;
+
+  /* Semantic label colors — meets WCAG AA */
+  --label-subtle: #334155;   /* slate-700 — 9:1 on white */
+  --label-muted: #475569;    /* slate-600 — 7:1 on white */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-    --card: #020617;
-    --card-foreground: #f8fafc;
-    --primary: #3b82f6;
-    --primary-foreground: #0f172a;
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --accent: #1e293b;
-    --accent-foreground: #f8fafc;
-    --border: #1e293b;
-    --input: #1e293b;
-    --ring: #3b82f6;
-  }
+.dark {
+  --background: #020617;
+  --foreground: #f1f5f9;
+  --card: #0f172a;
+  --card-foreground: #f1f5f9;
+  --primary: #60a5fa;
+  --primary-foreground: #0f172a;
+  --secondary: #1e293b;
+  --secondary-foreground: #f1f5f9;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e3a5f;
+  --accent-foreground: #93c5fd;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #3b82f6;
+  --label-subtle: #94a3b8;
+  --label-muted: #64748b;
 }
 
+/* ─── Base ───────────────────────────────────────────── */
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -65,44 +73,217 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
 
+/* ─── Glassmorphism ──────────────────────────────────── */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 213, 225, 0.6);
 }
 
 .dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transform: translateY(-4px);
+}
+
+/* ─── Gradient text ──────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+.dark .text-gradient {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transform: translateY(-4px);
+/* ─── Question Card ──────────────────────────────────── */
+.question-card {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-left-width: 4px;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
 }
 
+.dark .question-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+.question-card.answered {
+  border-color: #10b981;
+  box-shadow: 0 2px 16px -2px rgba(16, 185, 129, 0.12),
+              0 0 0 1px rgba(16, 185, 129, 0.08);
+}
+
+.dark .question-card.answered {
+  border-color: #059669;
+  box-shadow: 0 2px 16px -2px rgba(5, 150, 105, 0.2);
+}
+
+.question-card.unanswered {
+  border-left-color: #6366f1;
+  box-shadow: 0 1px 8px -1px rgba(99, 102, 241, 0.06);
+}
+
+.dark .question-card.unanswered {
+  border-left-color: #818cf8;
+}
+
+/* ─── Nav Pill ───────────────────────────────────────── */
+.nav-pill {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.dark .nav-pill {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: #334155;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Likert Option ──────────────────────────────────── */
+.likert-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 76px;
+  border-radius: 14px;
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.likert-option:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.likert-option:active {
+  transform: scale(0.94) !important;
+}
+
+/* Unselected — clear borders, crisp visibility */
+.likert-option.unselected {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #94a3b8;
+}
+
+.dark .likert-option.unselected {
+  border-color: #334155;
+  background: #1e293b;
+  color: #64748b;
+}
+
+.likert-option.unselected:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+  transform: scale(1.03);
+}
+
+.dark .likert-option.unselected:hover {
+  border-color: #475569;
+  background: #0f172a;
+}
+
+/* ─── Animations ─────────────────────────────────────── */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 1; }
+}
+.animate-pulse-subtle { animation: pulse-subtle 4s ease-in-out infinite; }
+
+@keyframes ring-pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.animate-ring-pulse { animation: ring-pulse 2.2s ease-out infinite; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.shimmer-btn {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+@keyframes check-pop {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  65%  { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
+.animate-check-pop { animation: check-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+@keyframes slide-up-fade {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up-fade 0.4s ease forwards; }
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 4s ease infinite;
+}
+
+@keyframes fade-in-up {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.45s ease both;
+}
+
+/* Staggered card entrance */
+.question-card:nth-child(1) { animation-delay: 0ms; }
+.question-card:nth-child(2) { animation-delay: 70ms; }
+.question-card:nth-child(3) { animation-delay: 140ms; }
+.question-card:nth-child(4) { animation-delay: 210ms; }
+.question-card:nth-child(5) { animation-delay: 280ms; }

@@ -12,7 +12,8 @@ import {
   CheckCircle2, 
   XCircle,
   Lock,
-  Search
+  Search,
+  Download
 } from 'lucide-react';
 
 interface TestResult {
@@ -114,6 +115,20 @@ export function AdminDashboard() {
     }
   };
 
+  const downloadTemplate = () => {
+    const csvContent = "id,text,domain,facet,keyed\nQ1,I love large parties,E,Friendliness,plus\nQ2,I often feel sad,N,Depression,plus\nQ3,I trust others,A,Trust,plus\nQ4,I love to read challenging material,O,Intellect,plus\nQ5,I am always prepared,C,Dutifulness,plus";
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'traitloop_questions_template.csv';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
   const filteredResults = results.filter(r => 
     r.email?.toLowerCase().includes(searchQuery.toLowerCase()) || 
     r.id.toLowerCase().includes(searchQuery.toLowerCase())
@@ -173,6 +188,14 @@ export function AdminDashboard() {
             />
           </div>
           
+          <button 
+            onClick={downloadTemplate}
+            className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm"
+          >
+            <Download size={16} />
+            <span className="hidden sm:inline">Template CSV</span>
+          </button>
+          
           <label className={cn(
             "flex items-center gap-2 px-6 py-2.5 bg-slate-900 dark:bg-slate-800 text-white text-sm font-bold rounded-xl cursor-pointer hover:scale-105 transition-all shadow-lg",
             importing && "opacity-50 cursor-wait"
@@ -215,11 +238,11 @@ export function AdminDashboard() {
         <table className="w-full text-left">
           <thead>
             <tr className="bg-slate-50 dark:bg-slate-900 border-b dark:border-slate-800">
-              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Timestamp</th>
-              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Assessment Participant</th>
-              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Communication</th>
-              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">OCEAN Summary</th>
-              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Actions</th>
+              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Timestamp</th>
+              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Assessment Participant</th>
+              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Communication</th>
+              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">OCEAN Summary</th>
+              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -227,18 +250,18 @@ export function AdminDashboard() {
               <tr key={r.id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                 <td className="px-8 py-6">
                   <div className="text-sm font-bold">{new Date(r.createdAt).toLocaleDateString()}</div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold">{new Date(r.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">{new Date(r.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                 </td>
                 <td className="px-8 py-6">
                   {r.email ? (
                     <div className="flex items-center gap-2">
-                       <Mail size={14} className="text-slate-400" />
+                       <Mail size={14} className="text-slate-500 dark:text-slate-400" />
                        <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{r.email}</span>
                     </div>
                   ) : (
-                    <span className="text-xs font-bold text-slate-300 italic">Anonymous</span>
+                    <span className="text-xs font-bold text-slate-400 italic">Anonymous</span>
                   )}
-                  <div className="text-[10px] text-slate-400 font-mono mt-1 uppercase">{r.id.slice(-8)}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1 uppercase">{r.id.slice(-8)}</div>
                 </td>
                 <td className="px-8 py-6">
                   {r.emailSent ? (
@@ -250,7 +273,7 @@ export function AdminDashboard() {
                        <XCircle size={10} /> Pending/Failed
                     </div>
                   ) : (
-                    <span className="text-slate-300">-</span>
+                    <span className="text-slate-400 dark:text-slate-500">-</span>
                   )}
                 </td>
                 <td className="px-8 py-6">
@@ -291,10 +314,10 @@ export function AdminDashboard() {
         
         {filteredResults.length === 0 && (
           <div className="py-32 text-center space-y-4">
-            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center text-slate-300 mx-auto">
+            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center text-slate-400 mx-auto">
               <Search size={32} />
             </div>
-            <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">No records found matching your criteria</p>
+            <p className="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-xs">No records found matching your criteria</p>
           </div>
         )}
       </div>
