@@ -1,0 +1,30 @@
+datasource db {
+  provider = "mongodb"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Question {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  text   String
+  domain String
+  facet  Int
+  keyed  String // "plus" or "minus"
+
+  @@map("questions")
+}
+
+model TestResult {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  answers      Json     // Raw user answers: { questionId: score }
+  scores       Json     // Computed: { domains: { O: 4.2, ... }, facets: { N1: 3.5, ... } }
+  summary      Json     // Computed: { O: "High", ... }
+  email        String?
+  emailSent    Boolean  @default(false)
+  timeElapsed  Int      // Total time in seconds
+  createdAt    DateTime @default(now())
+
+  @@map("test_results")
+}
