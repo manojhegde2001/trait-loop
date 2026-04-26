@@ -16,7 +16,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <ActionIcon variant="outline" size="md" className="rounded-full opacity-0">
+      <ActionIcon variant="outline" size="md" className="rounded-md opacity-0">
         <FiSun size={18} />
       </ActionIcon>
     );
@@ -26,7 +26,7 @@ export function ThemeToggle() {
     <ActionIcon
       variant="outline"
       size="md"
-      className="rounded-full border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-95"
+      className="rounded-md border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}

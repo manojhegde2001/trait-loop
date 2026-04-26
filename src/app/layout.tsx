@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased text-slate-900 bg-white dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300`}>
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased text-slate-900 bg-white dark:bg-slate-950 dark:text-slate-50`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           
@@ -35,7 +35,7 @@ export default function RootLayout({
             {children}
           </main>
 
-          <footer className="py-20 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 mt-32">
+          <footer className="py-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 mt-20">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div className="space-y-4">

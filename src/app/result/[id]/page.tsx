@@ -23,15 +23,15 @@ export default function ResultPage() {
 
   if (error) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-      <h1 className="text-2xl font-bold text-gray-800">Result Not Found</h1>
-      <p className="text-gray-500">The test result you are looking for does not exist or has been deleted.</p>
-      <a href="/" className="px-6 py-2 bg-blue-600 text-white rounded-lg">Go Home</a>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Result Not Found</h1>
+      <p className="text-slate-500 dark:text-slate-400">The test result you are looking for does not exist or has been deleted.</p>
+      <a href="/" className="px-6 py-2 bg-blue-600 text-white rounded-md font-bold">Go Home</a>
     </div>
   );
 
   if (!data) return (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="animate-pulse text-gray-400 font-bold text-xl uppercase tracking-widest">
+      <div className="text-slate-400 font-bold text-sm uppercase tracking-widest">
         Generating Report...
       </div>
     </div>
