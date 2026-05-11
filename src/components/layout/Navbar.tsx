@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
@@ -14,8 +15,16 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
       <nav className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-          TRAITLOOP
+        <Link href="/" className="flex items-center gap-2.5 text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+          <Image 
+            src="/logo.png" 
+            alt="TraitLoop" 
+            width={32} 
+            height={32} 
+            className="w-8 h-8 object-contain"
+            priority
+          />
+          <span>TRAITLOOP</span>
         </Link>
         <div className="flex gap-4 sm:gap-8 items-center">
           {!isAssessmentRoute && (
