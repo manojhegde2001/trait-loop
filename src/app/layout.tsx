@@ -44,15 +44,14 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div className="space-y-4">
-                  <Link href="/" className="flex items-center gap-2 text-xl font-black tracking-tighter text-blue-600">
+                  <Link href="/" className="flex items-center">
                     <Image 
                       src="/logo.png" 
                       alt="TraitLoop" 
-                      width={24} 
-                      height={24} 
-                      className="w-6 h-6 object-contain" 
+                      width={120} 
+                      height={34} 
+                      className="h-8 w-auto object-contain" 
                     />
-                    <span>TRAIT<span className="text-slate-900 dark:text-white">LOOP</span></span>
                   </Link>
                   <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs">
                     Providing scientifically validated personality assessments to help individuals and teams unlock their potential.
