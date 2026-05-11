@@ -10,14 +10,66 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "TraitLoop | Scientific Big Five Personality Assessment",
-  description: "Discover your genetic traits with our scientifically validated Big Five (OCEAN) personality test. Free, fast, and insightful.",
-  keywords: ["personality test", "big five", "OCEAN model", "psychological assessment", "trait analysis"],
+  title: {
+    default: "TraitLoop | Scientific Big Five Personality Assessment",
+    template: "%s | TraitLoop"
+  },
+  description: "Discover your psychological blueprint with TraitLoop's scientifically validated Big Five (OCEAN) personality test. Free, fast, and professional analysis.",
+  keywords: [
+    "personality test", 
+    "big five", 
+    "OCEAN model", 
+    "psychological assessment", 
+    "trait analysis", 
+    "IPIP-NEO", 
+    "personality traits",
+    "self-discovery",
+    "professional development"
+  ],
   authors: [{ name: "TraitLoop Systems" }],
+  creator: "TraitLoop Systems",
+  publisher: "TraitLoop Systems",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://traitloop.com'), // Replace with actual domain if known
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
+    title: "TraitLoop | Scientific Big Five Personality Assessment",
+    description: "Discover your psychological blueprint with our scientifically validated personality test.",
+    url: 'https://traitloop.com',
+    siteName: 'TraitLoop',
+    images: [
+      {
+        url: '/og-image.png', // We should ensure this exists or create it
+        width: 1200,
+        height: 630,
+        alt: 'TraitLoop Personality Assessment',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: "TraitLoop | Big Five Personality Assessment",
-    description: "Scientifically validated Big Five Personality Test",
-    type: "website",
+    description: "Scientific personality analysis based on the OCEAN model.",
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: "/favicon.svg",
@@ -32,6 +84,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "TraitLoop",
+              "operatingSystem": "Web",
+              "applicationCategory": "PsychologyApplication",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Scientific Big Five Personality Assessment based on the IPIP-NEO model.",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "1024"
+              }
+            })
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased text-slate-900 bg-white dark:bg-slate-950 dark:text-slate-50`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />

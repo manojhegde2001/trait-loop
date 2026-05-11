@@ -10,12 +10,15 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import { GraphBackground } from '@/components/ui/GraphBackground';
+
 export default function LandingPage() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
-      <section className="relative w-full py-16 md:py-24 flex flex-col items-center justify-center text-center px-6 border-b border-slate-100 dark:border-slate-800">
-        <div>
+      <section className="relative w-full py-16 md:py-24 flex flex-col items-center justify-center text-center px-6 border-b border-slate-100 dark:border-slate-800 overflow-hidden">
+        <GraphBackground />
+        <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-6">
             Scientific Personality Assessment
           </div>
