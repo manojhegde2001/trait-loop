@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
   }
 };
 
@@ -50,7 +50,7 @@ export default function RootLayout({
                       alt="TraitLoop" 
                       width={120} 
                       height={34} 
-                      className="h-8 w-auto object-contain" 
+                      className="h-8 w-auto object-contain dark:invert dark:hue-rotate-180" 
                     />
                   </Link>
                   <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs">

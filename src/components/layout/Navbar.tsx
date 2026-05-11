@@ -21,7 +21,7 @@ export function Navbar() {
             alt="TraitLoop" 
             width={140} 
             height={40} 
-            className="h-10 w-auto object-contain"
+            className="h-10 w-auto object-contain dark:invert dark:hue-rotate-180"
             priority
           />
         </Link>

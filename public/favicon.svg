@@ -1,0 +1,22 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="256" r="256" fill="white"/>
+  <g transform="translate(116, 140) scale(0.55)">
+    <!-- Left Circle -->
+    <path d="M180 440C80.5887 440 0 359.411 0 260C0 160.589 80.5887 80 180 80C279.411 80 360 160.589 360 260C360 359.411 279.411 440 180 440Z" fill="url(#paint0_linear)"/>
+    <!-- Right Circle -->
+    <path d="M340 440C240.589 440 160 359.411 160 260C160 160.589 240.589 80 340 80C439.411 80 520 160.589 520 260C520 359.411 439.411 440 340 440Z" fill="url(#paint1_linear)"/>
+    <!-- Dots -->
+    <circle cx="180" cy="0" r="60" fill="#7C22CE"/>
+    <circle cx="340" cy="0" r="60" fill="#4C1D95"/>
+  </g>
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="260" x2="360" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DB2777"/>
+      <stop offset="1" stop-color="#7C22CE"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="160" y1="260" x2="520" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C22CE"/>
+      <stop offset="1" stop-color="#4C1D95"/>
+    </linearGradient>
+  </defs>
+</svg>
